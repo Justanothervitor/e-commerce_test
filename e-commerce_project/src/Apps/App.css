@@ -1,0 +1,51 @@
+
+.NavBar
+{
+height:100px;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+background-color: springgreen;
+}
+
+.NavBar > h1{
+    font-size: 35px;
+    text-align: left;
+}
+
+.NavBar > h4{
+    font-size :25px;
+    text-align: right;
+}
+
+.MainPage
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: orangered;
+}
+
+.Footer
+{
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.produtos
+{   
+    padding: 10mm;
+}
+.bloco 
+{
+    height:200px;
+    background-color: yellow;
+    color:black;
+}
+.productImage
+{
+    height:100px;
+}

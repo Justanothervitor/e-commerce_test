@@ -31,6 +31,15 @@ public class ProductRepository implements ProductsInterface{
 		ProductDomain product = this.template.findOne(query,ProductDomain.class);
 		return product;
 	}
+	
+	/*@Override
+	public List<ProductDomain> findByName(String name)
+	{
+		Query query = new Query();
+		query.addCriteria(Criteria.where("productName").is(name));
+		List<ProductDomain> list = this.template.find(query,ProductDomain.class);
+		return list;
+	}*/
 
 	@Override
 	public ProductDomain createANewProduct(ProductDomain product) {

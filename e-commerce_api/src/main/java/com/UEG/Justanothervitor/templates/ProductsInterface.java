@@ -10,6 +10,8 @@ public interface ProductsInterface{
 	
 	ProductDomain findById(String id);
 	
+	//List<ProductDomain> findByName(String name);
+	
 	ProductDomain createANewProduct(ProductDomain product);
 	
 	void deleteAProduct(String id);

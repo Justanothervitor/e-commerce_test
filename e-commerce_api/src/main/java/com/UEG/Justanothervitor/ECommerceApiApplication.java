@@ -18,8 +18,8 @@ public class ECommerceApiApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/products").allowedOrigins("http://localhost:8080");
-				registry.addMapping("/users").allowedOrigins("http://localhost:8080");
+				registry.addMapping("/products").allowedOrigins("http://localhost:3000");
+				//registry.addMapping("/users").allowedOrigins("http://localhost:3000");
 			}
 		};
 	}

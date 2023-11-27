@@ -35,7 +35,7 @@ public class ProductController {
 	public ResponseEntity<ProductDomain> getById(@PathVariable String id)
 	{
 		ProductDomain product = this.repo.findById(id);
-		return ResponseEntity.ok().body(product);
+		return ResponseEntity.ok(product);
 	}
 	
 	@PostMapping(value="products/")
