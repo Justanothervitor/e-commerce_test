@@ -1,7 +1,6 @@
 package com.UEG.Justanothervitor.domain;
 
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.Set;
 
 import org.springframework.data.annotation.Id;
@@ -10,32 +9,25 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
-@Document(collection ="user")
-public class UserDomain implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
+import com.UEG.Justanothervitor.domain.roles.RolesDomain;
 
+@Document(collection = "user")
+public class UserDomain implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	@Id
 	private String id;
-	@Indexed(unique = true,direction = IndexDirection.DESCENDING)
-	private String nome;
+	@Indexed(unique = true, direction = IndexDirection.DESCENDING)
+	private String username;
 	private String email;
 	private String password;
-	private Boolean enabled;
+
 	@DocumentReference
 	private Set<RolesDomain> roles;
-	
-	public UserDomain()
-	{
-		
-	}
-	
-	public UserDomain(String id, String nome, String email, String password,Boolean enabled,Set<RolesDomain> roles) {
+
+	public UserDomain(String username, String email, String password) {
 		super();
-		this.id = id;
-		this.enabled = enabled;
-		this.nome = nome;
-		this.roles = roles;
+		this.username = username;
 		this.email = email;
 		this.password = password;
 	}
@@ -48,12 +40,12 @@ public class UserDomain implements Serializable{
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getEmail() {
@@ -71,42 +63,13 @@ public class UserDomain implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 
 	public Set<RolesDomain> getRoles() {
 		return roles;
-	}
-	
-
-	public Boolean getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
 	}
 
 	public void setRoles(Set<RolesDomain> roles) {
 		this.roles = roles;
 	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserDomain other = (UserDomain) obj;
-		return Objects.equals(id, other.id);
-	}
-	
-	
 
 }

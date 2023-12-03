@@ -6,7 +6,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.UEG.Justanothervitor.domain.RolesDomain;
+import com.UEG.Justanothervitor.domain.roles.ERoles;
+import com.UEG.Justanothervitor.domain.roles.RolesDomain;
 import com.UEG.Justanothervitor.templates.RolesInterface;
 
 @Repository
@@ -16,10 +17,11 @@ public class RolesRepository implements RolesInterface {
 	private MongoTemplate template;
 	
 	@Override
-	public RolesDomain findByRole(String role) {
+	public RolesDomain findByRole(ERoles role) {
 		Query query = new Query();
-		query.addCriteria(Criteria.where("role").is(role));
-		return this.template.findOne(query,RolesDomain.class);
+		query.addCriteria(Criteria.where("name").is(role));
+		RolesDomain foundRole = this.template.findOne(query,RolesDomain.class);
+		return foundRole;
 	}
 	
 	@Override

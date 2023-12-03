@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import axios from "axios"
 
-const PRODUCT_API = "http://localhost:8080/products"
+const PRODUCT_API = "http://localhost:8080/api/products"
 
 class ProductServices
 {

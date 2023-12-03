@@ -12,14 +12,15 @@ public class ECommerceApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ECommerceApiApplication.class, args);
 	}
-
+	
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/products").allowedOrigins("http://localhost:3000");
-				//registry.addMapping("/users").allowedOrigins("http://localhost:3000");
+				registry.addMapping("/api/products").allowedOrigins("http://localhost:3000");
+				registry.addMapping("api/auth/login").allowedOrigins("http://localhost:3000");
+				registry.addMapping("api/auth/signup").allowedOrigins("http://localhost:3000");
 			}
 		};
 	}

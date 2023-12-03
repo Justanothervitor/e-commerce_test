@@ -19,7 +19,16 @@ public class UserRepository implements UserInterface{
 	public UserDomain FindByEmail(String email) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("email").is(email));
-		return template.findOne(query, UserDomain.class);
+		UserDomain user = template.findOne(query, UserDomain.class);
+		return user;
+	}
+	
+	@Override
+	public UserDomain FindByUsername(String username)
+	{
+		Query query = new Query();
+		query.addCriteria(Criteria.where("username").is(username));
+		return this.template.findOne(query, UserDomain.class);
 	}
 	
 	@Override
@@ -27,4 +36,29 @@ public class UserRepository implements UserInterface{
 	{
 		return this.template.save(obj);
 	}
+	
+	@Override
+	public Boolean verifyUser (String username)
+	{
+		Query query = new Query();
+		query.addCriteria(Criteria.where("username").is(username));
+		if(this.template.exists(query,UserDomain.class)) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	@Override
+	public Boolean verifyEmail (String email)
+	{
+		Query query = new Query();
+		query.addCriteria(Criteria.where("email").is(email));
+		if(this.template.exists(query,UserDomain.class)) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 }

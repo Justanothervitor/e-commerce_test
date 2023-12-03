@@ -17,41 +17,41 @@ import org.springframework.web.bind.annotation.RestController;
 import com.UEG.Justanothervitor.domain.ProductDomain;
 import com.UEG.Justanothervitor.repository.ProductRepository;
 
-@RestController(value="products")
-@RequestMapping
+@RestController
+@RequestMapping("api/products")
 public class ProductController {
 
 	@Autowired
 	private ProductRepository repo;
 	
-	@GetMapping(value="products")
+	@GetMapping(value="/getproducts")
 	public ResponseEntity<List<ProductDomain>> getAll()
 	{
 		List<ProductDomain> products = this.repo.findAll();
 		return ResponseEntity.ok().body(products);	
 	}
 	
-	@GetMapping(value="/products/{id}")
+	@GetMapping(value="/{id}")
 	public ResponseEntity<ProductDomain> getById(@PathVariable String id)
 	{
 		ProductDomain product = this.repo.findById(id);
 		return ResponseEntity.ok(product);
 	}
 	
-	@PostMapping(value="products/")
+	@PostMapping(value="addproduct")
 	public ResponseEntity<ProductDomain> insert (@RequestBody ProductDomain obj)
 	{
 		return new ResponseEntity<ProductDomain>(this.repo.createANewProduct(obj),HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping(value="products/{id}")
+	@DeleteMapping(value="delete/{id}")
 	public ResponseEntity<Void> delete(@PathVariable String id)
 	{
 		this.repo.deleteAProduct(id);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PutMapping(value ="products/{id}")
+	@PutMapping(value ="update/{id}")
 	public ResponseEntity<ProductDomain> update (@PathVariable String id, @RequestBody ProductDomain obj)
 	{
 		ProductDomain updated = this.repo.updateAProduct(id, obj);

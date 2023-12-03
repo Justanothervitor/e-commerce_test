@@ -1,19 +1,27 @@
 import axios from "axios";
 
-const USERS_API = "http://localhost:8080/users"
-const LOGIN_API = "http://localhost:8080/account"
+const LOGIN_API = "http://localhost:8080/auth/login"
+const SIGNUP_API = "http//localhost:8080/auth/signup"
+const DASHBOARD_API = "http//localhost:8080/dashboard"
 
 class UserServices{
-
-    getAll()
-    {
-        return axios.get(USERS_API)
-    }
 
     login()
     {
         return axios.get(LOGIN_API)
     }
+
+    signup()
+    {
+        axios.get(SIGNUP_API)
+        return axios.post(SIGNUP_API)
+    }
+
+    dashboard()
+    {
+        return axios.get(DASHBOARD_API)
+    }
+
 }
 
 export default new UserServices();
