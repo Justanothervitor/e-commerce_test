@@ -14,6 +14,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import com.UEG.Justanothervitor.config.CustomizeAuthenticationSucessHandler;
 import com.UEG.Justanothervitor.config.jwt.AuthEntryPointJwt;
@@ -70,4 +73,21 @@ public class WebSecurityConfig
 
 	    return http.build();
 	  }
+	  
+	  @Bean
+	    SecurityFilterChain appSecurity(HttpSecurity http, MvcRequestMatcher.Builder mvc) throws Exception {
+
+	        return http
+	                .authorizeHttpRequests(auths ->
+	                        auths.requestMatchers(AntPathRequestMatcher.antMatcher("/api/test/**")).authenticated()
+	                                //.requestMatchers(AntPathRequestMatcher.antMatcher("/api/products/**")).authenticated()
+	                                .requestMatchers(AntPathRequestMatcher.antMatcher("/**")).permitAll()
+	                        ).build();
+
+	    }
+
+	    @Bean
+	    MvcRequestMatcher.Builder mvc(HandlerMappingIntrospector introspector) {
+	        return new MvcRequestMatcher.Builder(introspector);
+	    }
 	}
