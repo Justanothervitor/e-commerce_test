@@ -11,11 +11,6 @@ class ListProductViewComponent extends React.Component
         }
     }
 
-    getById(id)
-    {
-        this.props.history.push('/products/{id}');
-    }
-
     componentDidMount()
     {
         ProductServices.getAll().then((res)=>{

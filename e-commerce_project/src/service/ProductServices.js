@@ -1,19 +1,20 @@
 // eslint-disable-next-line
 import axios from "axios"
 
-const PRODUCT_API = "http://localhost:8080/api/products"
+const PRODUCT_API = "http://localhost:8080/api/products/"
+const GET_PRODUCTS_API = "http://localhost:8080/api/products/getproducts"
 
 class ProductServices
 {
 
     getAll()
     {
-        return axios.get(PRODUCT_API);
+        return axios.get(GET_PRODUCTS_API);
     }
 
     getById(productId)
     {
-        return axios.get(PRODUCT_API+'/'+productId);
+        return axios.get(PRODUCT_API+productId);
     }
     
     insert(product)

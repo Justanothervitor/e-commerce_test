@@ -29,6 +29,8 @@ import com.UEG.Justanothervitor.payload.response.MessageResponse;
 import com.UEG.Justanothervitor.repository.RolesRepository;
 import com.UEG.Justanothervitor.repository.UserRepository;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("api/auth")
 public class AuthController {
@@ -49,7 +51,7 @@ public class AuthController {
 	JwtUtils jwtUtils;
 	
 	@PostMapping(value="/login")
-	public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest)
+	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest)
 	{
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),loginRequest.getPassword()));
@@ -72,7 +74,7 @@ public class AuthController {
 	}
 	
 	@PostMapping(value="/signup")
-	public ResponseEntity<?> registerUser(@RequestBody SignupRequest signupRequest)
+	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signupRequest)
 	{
 		if(userRepo.verifyUser(signupRequest.getUsername())) {
 			return ResponseEntity

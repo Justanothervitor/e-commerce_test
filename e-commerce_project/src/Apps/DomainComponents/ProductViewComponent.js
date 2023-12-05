@@ -6,7 +6,7 @@ class ProductViewComponent extends React.Component
     constructor(props){
         super(props)
         this.state = {
-            productId : this.props.params.productId,
+            productId : this.props.match.params.productId,
             product : {}
         }
     }
@@ -14,6 +14,10 @@ class ProductViewComponent extends React.Component
     componentDidMount()
     {
         ProductService.getById(this.state.productId).then(res =>{
+            if(res.data== null)
+            {
+                this.props.history.push('api/products/:id');
+            }
             this.setState({product: res.data});
         });
     }
@@ -21,7 +25,7 @@ class ProductViewComponent extends React.Component
     render()
     {
         return(
-            <div>
+<div>
                 <br/>
                 <div>
                     <div>
@@ -35,17 +39,16 @@ class ProductViewComponent extends React.Component
                         <div>{this.state.product.description}</div>
                     </div>
                     <div>
-                        <label>Link da Imagem:</label>
-                        <div>{this.state.product.linkToImage}</div>
+                        <div><img src={this.state.product.linkToImage} alt=""/></div>
                     </div>
                     <div>
                         <label>Preço do Produto:</label>
-                        <div>{this.state.product.price}</div>
+                        <div>{this.state.price}</div>
                     </div>
 
                 </div>
             </div>
-        )
+                    )
     }
 }
 
