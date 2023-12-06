@@ -6,7 +6,7 @@ class ProductViewComponent extends React.Component
     constructor(props){
         super(props)
         this.state = {
-            productId : this.props.match.params.productId,
+            productId : this.props.productId,
             product : {}
         }
     }

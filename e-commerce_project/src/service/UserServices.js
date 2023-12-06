@@ -8,7 +8,7 @@ class UserServices{
 
     login()
     {
-        return axios.get(LOGIN_API)
+        return axios.post(LOGIN_API)
     }
 
     signup()

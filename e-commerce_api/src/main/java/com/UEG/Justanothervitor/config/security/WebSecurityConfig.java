@@ -13,9 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import com.UEG.Justanothervitor.config.jwt.AuthEntryPointJwt;
@@ -72,14 +70,15 @@ public class WebSecurityConfig
 	  @Bean
 	    SecurityFilterChain appSecurity(HttpSecurity http, MvcRequestMatcher.Builder mvc) throws Exception {
 
-	        return http
-	                .authorizeHttpRequests(auths ->
-	                        auths.requestMatchers(AntPathRequestMatcher.antMatcher("/api/test/**")).authenticated()
-	                        .requestMatchers(AntPathRequestMatcher.antMatcher("api/auth/**")).permitAll()
-	                                .requestMatchers(AntPathRequestMatcher.antMatcher("/api/**")).permitAll()
-	                                .anyRequest().permitAll()
-	                        ).build();
-
+	       http.csrf(csrf->csrf.disable())
+	    		   .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
+	    		   .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+	    		   .authorizeHttpRequests(auth->auth.requestMatchers(mvc.pattern("api/auth/**")).permitAll()
+	    	       .requestMatchers(mvc.pattern("api/products/**")).permitAll()
+	    		   .requestMatchers(mvc.pattern("api/test/**")).authenticated()
+	    		   .anyRequest().permitAll()
+	    				   );
+	       return http.build();
 	    }
 
 	    @Bean
